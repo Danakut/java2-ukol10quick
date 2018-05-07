@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="cs"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/style.css" th:href="${'css/style.css'}" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&amp;subset=latin-ext" rel="stylesheet">
+    <title>Ukol10 - pexeso (funkční)</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1><a href="index.html">Pexeso</a></h1>
+        </div>
+    </header>
+
+    <main>
+        <div th:if="${currentBoard.status == T(cz.czechitas.webapp.entity.GameStatus).GAME_FINISHED}" class="konec">
+            <h2>konec hry</h2>
+            <p><a th:href="." href="table.html">začít novou hru</a></p>
+        </div>
+
+        <form method="post">
+            <div class="container">
+                <th:block th:each="card : ${currentBoard.cardset}" style="display: none;">
+                    <input class="card" type="image"
+                           th:if="${card.status == T(cz.czechitas.webapp.entity.CardStatus).FACE}"
+                           th:src="${'images/' + card.filepath}"
+                           th:name="${'clickedCard' + card.cardNumber}"/>
+                    <input class="card" type="image"
+                           th:if="${card.status == T(cz.czechitas.webapp.entity.CardStatus).BACK}"
+                           th:src="${'images/rub.png'}"
+                           th:name="${'clickedCard' + card.cardNumber}"/>
+                    <img class="taken"
+                         th:if="${card.status == T(cz.czechitas.webapp.entity.CardStatus).TAKEN}"
+                         th:src="${'images/empty.png'}" />
+
+                </th:block>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <div class="footer">
+            <p>Obrázky na pexeso: <a href="http://www.sarna.net/wiki/Main_Page" target="blank">BattleTechWiki</a>. Copyright: FASA, a potom spousta dalších.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>
