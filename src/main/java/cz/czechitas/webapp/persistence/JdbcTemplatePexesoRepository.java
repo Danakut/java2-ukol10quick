@@ -10,6 +10,7 @@ import org.springframework.jdbc.support.*;
 import org.springframework.stereotype.*;
 import cz.czechitas.webapp.entity.*;
 
+@Component
 public class JdbcTemplatePexesoRepository implements PexesoRepository {
 
     private JdbcTemplate querySender;

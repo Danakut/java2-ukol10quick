@@ -4,7 +4,7 @@ import java.util.*;
 import org.springframework.stereotype.*;
 import cz.czechitas.webapp.entity.*;
 
-@Component
+//@Component
 public class InMemoryPexesoRepository implements PexesoRepository {
 
     private Random random;

@@ -28,16 +28,6 @@
             </p>
         </div>
 
-        <div th:if="${currentBoard.status == T(cz.czechitas.webapp.entity.GameStatus).KONEC}" class="finished">
-            <h2>konec hry</h2>
-            <p>
-                <a th:href="newtable.html" href="table.html">Začít novou hru</a>
-            </p>
-            <p>
-                <a href="game-list.html">Seznam her</a>
-            </p>
-        </div>
-
         <form method="post">
             <div class="container">
                 <th:block th:each="card : ${currentBoard.cardset}" style="display: none;">
