@@ -1,9 +1,10 @@
 package cz.czechitas.webapp.persistence;
 
 import java.util.*;
+import org.springframework.stereotype.*;
 import cz.czechitas.webapp.entity.*;
 
-
+@Component
 public class InMemoryPexesoRepository implements PexesoRepository {
 
     private Random random;
@@ -12,6 +13,18 @@ public class InMemoryPexesoRepository implements PexesoRepository {
     public InMemoryPexesoRepository() {
         random = new Random();
         gameBoardMap = new HashMap<>();
+    }
+
+    public List<GameBoard> findAll() {
+        Set<Long> idSet = gameBoardMap.keySet();
+        List<Long> idList = new ArrayList<>();
+        idSet.forEach(id -> idList.add(id));
+        List<GameBoard> gameList = new ArrayList<>();
+        for (int i = 0; i < idList.size(); i++) {
+            Long boardId = idList.get(i);
+            gameList.add(gameBoardMap.get(boardId));
+        }
+        return gameList;
     }
 
     public GameBoard findOne(Long id) {
@@ -28,6 +41,10 @@ public class InMemoryPexesoRepository implements PexesoRepository {
         }
         gameBoardMap.put(board.getId(), board);
         return board;
+    }
+
+    public void delete(Long id) {
+        gameBoardMap.remove(id);
     }
 
     private Long vygenerujNahodneId() {

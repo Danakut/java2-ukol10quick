@@ -10,7 +10,6 @@ import org.springframework.jdbc.support.*;
 import org.springframework.stereotype.*;
 import cz.czechitas.webapp.entity.*;
 
-@Component
 public class JdbcTemplatePexesoRepository implements PexesoRepository {
 
     private JdbcTemplate querySender;
@@ -21,6 +20,10 @@ public class JdbcTemplatePexesoRepository implements PexesoRepository {
         querySender = new JdbcTemplate(dataSource);
         boardConverter = BeanPropertyRowMapper.newInstance(GameBoard.class);
         cardConverter = BeanPropertyRowMapper.newInstance(Card.class);
+    }
+
+    public List<GameBoard> findAll() {
+        return querySender.query("SELECT ID, Stav AS Status FROM HerniPlochy", boardConverter);
     }
 
     public GameBoard findOne(Long id) {
@@ -36,6 +39,10 @@ public class JdbcTemplatePexesoRepository implements PexesoRepository {
         }
         updateBoard(board);
         return board;
+    }
+
+    public void delete(Long id) {
+
     }
     
     private GameBoard setupNewBoard(GameBoard board) {
@@ -90,4 +97,3 @@ public class JdbcTemplatePexesoRepository implements PexesoRepository {
         return board;
     }
 }
-

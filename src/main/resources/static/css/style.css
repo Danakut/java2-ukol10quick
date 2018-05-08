@@ -35,13 +35,13 @@ main {
     text-align: center;
 }
 
-.konec h2 {
-    text-transform: uppercase;
-    font-size: large;
+a {
+    color: #FFC103;
 }
 
-.konec a {
-    color: #FFC103;
+.finished h2 {
+    text-transform: uppercase;
+    font-size: large;
 }
 
 div.container {
@@ -85,4 +85,29 @@ div.container {
 
 .footer a {
     color:inherit;
+}
+
+/*--------------------------------------------------------------*/
+
+table {
+    width: 50%;
+    max-width: 800px;
+    min-width: 300px;
+    margin: 0 auto;
+    background: black;
+}
+
+th {
+    color: #2a2b2e;
+    background: rgba(164, 194, 162, 0.8);
+}
+
+td {
+    padding: 5px;
+    border-bottom: 1px solid #a4c2a2;
+}
+
+.gamelist_button {
+    font-family: BTLogo, sans-serif;
+    color: #3A3A3A;
 }

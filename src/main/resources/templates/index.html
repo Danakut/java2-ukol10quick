@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="cs"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../static/css/style.css" th:href="${'css/style.css'}" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&amp;subset=latin-ext" rel="stylesheet">
+    <title>Ukol10 - pexeso (funkční)</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1><a href="index.html">Pexeso</a></h1>
+        </div>
+    </header>
+
+    <main>
+        <p>
+            <a href="table.html" th:href="${'newtable.html'}">Začít novou hru</a>
+        </p>
+        <p>
+            <a href="game-list.html">Seznam her</a>
+        </p>
+    </main>
+
+    <footer>
+        <div class="footer">
+            <p>Obrázky na pexeso: <a href="http://www.sarna.net/wiki/Main_Page" target="blank">BattleTechWiki</a>. Copyright: FASA, a potom spousta dalších.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

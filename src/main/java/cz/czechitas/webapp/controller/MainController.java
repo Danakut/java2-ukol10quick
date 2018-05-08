@@ -12,16 +12,27 @@ import cz.czechitas.webapp.persistence.*;
 @Controller
 public class MainController {
 
-//    private PexesoService pexesoService = new PexesoService(new JdbcTemplatePexesoRepository());
-
     private PexesoService pexesoService;
 
     public MainController(PexesoRepository pexesoRepository) {
         pexesoService = new PexesoService(pexesoRepository);
     }
 
-    @RequestMapping(value = "/")
-    public String showIndex() {
+    @RequestMapping("/")
+    public ModelAndView showIndex() {
+        return new ModelAndView("index");
+    }
+
+    @RequestMapping ("/game-list.html")
+    public ModelAndView showGameList() {
+        List<GameBoard> gameList = pexesoService.findAllBoards();
+        ModelAndView moavi = new ModelAndView("game-list");
+        moavi.addObject("listOfAllGames", gameList);
+        return moavi;
+    }
+
+    @RequestMapping(value = "/newtable.html")
+    public String showNewTable() {
         GameBoard board = pexesoService.createBoard();
         return "redirect:/table.html?id=" + board.getId();
     }
@@ -43,6 +54,12 @@ public class MainController {
         return "redirect:/table.html?id=" + boardId;
     }
 
+    @RequestMapping(value = "/delete/{gameId}.html", method=RequestMethod.POST)
+    public ModelAndView deleteTable(@PathVariable ("gameId") Long id) {
+        pexesoService.deleteBoard(id);
+        return new ModelAndView("redirect:/game-list.html");
+    }
+
     private int findClickedCardNumber(Collection<String> parameterNames) {
         Pattern regex = Pattern.compile("clickedCard(\\d+).+");
         for (String paramName : parameterNames) {
@@ -56,6 +73,6 @@ public class MainController {
 
     @ExceptionHandler(GameNotFoundException.class)
     public String zacniNovouHruPokudIdNeexistuje() {
-        return "redirect:/";
+        return "redirect:/newtable.html";
     }
 }

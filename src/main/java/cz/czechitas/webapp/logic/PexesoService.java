@@ -7,12 +7,16 @@ import cz.czechitas.webapp.persistence.*;
 public class PexesoService {
     
 
-    public final int CARD_PAIR_SUM = 4;
+    public final int CARD_PAIR_SUM = 1;
 
     private PexesoRepository gameProvider;
 
     public PexesoService(PexesoRepository gameProvider) {
         this.gameProvider = gameProvider;
+    }
+
+    public List<GameBoard> findAllBoards() {
+        return gameProvider.findAll();
     }
 
     public GameBoard createBoard() {
@@ -23,6 +27,10 @@ public class PexesoService {
 
     public GameBoard findBoard(Long id) {
         return gameProvider.findOne(id);
+    }
+
+    public void deleteBoard(Long id) {
+        gameProvider.delete(id);
     }
 
     public void makeMove(Long boardId, int clickedCardNumber) {
