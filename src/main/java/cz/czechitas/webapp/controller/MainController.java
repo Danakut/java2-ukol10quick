@@ -12,7 +12,7 @@ import cz.czechitas.webapp.persistence.*;
 @Controller
 public class MainController {
 
-    private PexesoService pexesoService = new PexesoService(new InMemoryPexesoRepository());
+    private PexesoService pexesoService = new PexesoService(new JdbcTemplatePexesoRepository());
     
 //    private PexesoService pexesoService;
 //
