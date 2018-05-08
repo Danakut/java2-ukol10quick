@@ -35,7 +35,7 @@ public class InMemoryPexesoRepository implements PexesoRepository {
     }
 
     private GameBoard setupNewBoard(GameBoard board) {
-        board.setId(vygenerujNahodneId());        //co se stane, kdyz se nahodne vygeneruje id hry, ktera uz je v "databazi" (gameBoardMap)?
+        board.setId(vygenerujNahodneId());        //doplnit podminku, ktera vylouci, ze nahodne cislo bude id hry, ktera uz je v "databazi" (gameBoardMap)?
         for (Card card : board.getCardset()) {
             card.setId(vygenerujNahodneId());
         }

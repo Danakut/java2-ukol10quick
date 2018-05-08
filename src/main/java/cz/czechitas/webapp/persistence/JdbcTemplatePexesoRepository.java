@@ -20,7 +20,7 @@ public class JdbcTemplatePexesoRepository implements PexesoRepository {
             dataSource = new MariaDbDataSource();
             dataSource.setUserName("student");
             dataSource.setPassword("password");
-            dataSource.setUrl("jdbc:mysql://localhost:3306/Pexeso");
+            dataSource.setUrl("jdbc:mysql://localhost:3306/PexesoCZ");
             querySender = new JdbcTemplate(dataSource);
             boardConverter = BeanPropertyRowMapper.newInstance(GameBoard.class);
             cardConverter = BeanPropertyRowMapper.newInstance(Card.class);
@@ -30,8 +30,8 @@ public class JdbcTemplatePexesoRepository implements PexesoRepository {
     }
 
     public GameBoard findOne(Long id) {
-        GameBoard board = querySender.queryForObject("SELECT ID, Status FROM Gameboards WHERE ID = ?", boardConverter, id);
-        List<Card> cardset = querySender.query("SELECT ID, CardNumber, Status FROM Cards WHERE GameBoardID = ?",cardConverter, id);
+        GameBoard board = querySender.queryForObject("SELECT ID, Stav AS Status FROM HerniPlochy WHERE ID = ?", boardConverter, id);
+        List<Card> cardset = querySender.query("SELECT ID, CisloKarty AS CardNumber, Stav AS Status FROM Karty WHERE HerniPlochaID = ?",cardConverter, id);
         board.setCardset(cardset);
         return board;
     }
@@ -46,7 +46,7 @@ public class JdbcTemplatePexesoRepository implements PexesoRepository {
     
     private GameBoard setupNewBoard(GameBoard board) {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        String sql = "INSERT INTO GameBoards (Status, LastMove) VALUES (?, ?)";
+        String sql = "INSERT INTO HerniPlochy (Stav, CasPoslednihoTahu) VALUES (?, ?)";
         querySender.update((Connection con) -> {
                     PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                     statement.setString(1, board.getStatus().name());              // proč je tu getStatus().name() místo jen getStatus()?
@@ -66,8 +66,7 @@ public class JdbcTemplatePexesoRepository implements PexesoRepository {
 
     private void addCard(Card card, Long boardId, int cardArrayIndex) {
         GeneratedKeyHolder cardKeyHolder = new GeneratedKeyHolder();
-        String sql = "INSERT INTO Cards (CardNumber, Status, GameBoardID, CardOrder) " +
-                "VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Karty (Cislokarty, Stav, HerniPlochaID, PoradiKarty) VALUES (?, ?, ?, ?)";
         querySender.update((Connection con) -> {
                     PreparedStatement statement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                     statement.setInt(1, card.getCardNumber());
@@ -81,7 +80,7 @@ public class JdbcTemplatePexesoRepository implements PexesoRepository {
     }
 
     private GameBoard updateBoard(GameBoard board) {
-        querySender.update("UPDATE GameBoards SET Status = ?,LastMove = ? WHERE ID = ?",
+        querySender.update("UPDATE HerniPlochy SET Stav = ?,CasPoslednihoTahu = ? WHERE ID = ?",
                 board.getStatus().name(),     // proč je tu getStatus().name() místo jen getStatus()?
                 Instant.now(),
                 board.getId());
@@ -89,7 +88,7 @@ public class JdbcTemplatePexesoRepository implements PexesoRepository {
         List<Card> cardset = board.getCardset();
         for (int i = 0; i < cardset.size(); i++) {
             Card card = cardset.get(i);
-            querySender.update("UPDATE Cards SET Status = ?, CardOrder = ? WHERE ID = ?",
+            querySender.update("UPDATE Karty SET Stav = ?, PoradiKarty = ? WHERE ID = ?",
                     card.getStatus().name(),
                     i,
                     card.getId());

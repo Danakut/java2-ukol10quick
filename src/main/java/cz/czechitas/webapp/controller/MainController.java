@@ -13,12 +13,6 @@ import cz.czechitas.webapp.persistence.*;
 public class MainController {
 
     private PexesoService pexesoService = new PexesoService(new JdbcTemplatePexesoRepository());
-    
-//    private PexesoService pexesoService;
-//
-//    public MainController(PexesoService pexesoService) {
-//        this.pexesoService = pexesoService;
-//    }
 
     @RequestMapping(value = "/")
     public String showIndex() {
@@ -58,5 +52,4 @@ public class MainController {
     public String zacniNovouHruPokudIdNeexistuje() {
         return "redirect:/";
     }
-
 }
