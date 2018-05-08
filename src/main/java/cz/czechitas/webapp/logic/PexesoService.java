@@ -5,17 +5,16 @@ import cz.czechitas.webapp.entity.*;
 import cz.czechitas.webapp.persistence.*;
 
 public class PexesoService {
+    
 
     public final int CARD_PAIR_SUM = 4;
-    private PexesoRepository gameProvider = new PexesoRepository();
+//    private InMemoryPexesoRepository gameProvider = new InMemoryPexesoRepository();
 
-//  private PexesoRepository gameProvider;
-//
-//  public PexesoService(PexesoRepository gameProvider) {
-//        this.gameProvider = gameProvider;
-//  }
+    private PexesoRepository gameProvider;
 
-
+    public PexesoService(PexesoRepository gameProvider) {
+        this.gameProvider = gameProvider;
+    }
 
     public GameBoard createBoard() {
         GameBoard board = new GameBoard(createCardset(), GameStatus.PLAYER1_CHOOSE_1ST_CARD);
