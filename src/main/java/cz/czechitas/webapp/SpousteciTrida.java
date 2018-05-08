@@ -1,5 +1,8 @@
 package cz.czechitas.webapp;
 
+import java.sql.*;
+import javax.sql.*;
+import org.mariadb.jdbc.*;
 import org.slf4j.*;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
@@ -76,20 +79,17 @@ public class SpousteciTrida extends SpringBootServletInitializer {
     }
 
 
-    /*
-    // TODO
+
     @Bean
     public DataSource zdrojDat() {
         try {
             MariaDbDataSource dataSource = new MariaDbDataSource();
             dataSource.setUserName("student");
             dataSource.setPassword("password");
-            dataSource.setUrl("jdbc:mysql://localhost:3306/Pexeso");
+            dataSource.setUrl("jdbc:mysql://localhost:3306/PexesoCZ");
             return dataSource;
         } catch (SQLException e) {
             throw new RuntimeException("Nepodarilo se pripojit do databaze: " + e.getMessage(), e);
         }
     }
-    */
-
 }

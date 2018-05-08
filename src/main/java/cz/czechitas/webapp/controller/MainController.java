@@ -12,7 +12,13 @@ import cz.czechitas.webapp.persistence.*;
 @Controller
 public class MainController {
 
-    private PexesoService pexesoService = new PexesoService(new JdbcTemplatePexesoRepository());
+//    private PexesoService pexesoService = new PexesoService(new JdbcTemplatePexesoRepository());
+
+    private PexesoService pexesoService;
+
+    public MainController(PexesoRepository pexesoRepository) {
+        pexesoService = new PexesoService(pexesoRepository);
+    }
 
     @RequestMapping(value = "/")
     public String showIndex() {

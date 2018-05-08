@@ -3,30 +3,24 @@ package cz.czechitas.webapp.persistence;
 import java.sql.*;
 import java.time.*;
 import java.util.*;
+import javax.sql.*;
 import org.mariadb.jdbc.*;
 import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.support.*;
+import org.springframework.stereotype.*;
 import cz.czechitas.webapp.entity.*;
 
+@Component
 public class JdbcTemplatePexesoRepository implements PexesoRepository {
 
-    private MariaDbDataSource dataSource;
     private JdbcTemplate querySender;
     private RowMapper<GameBoard> boardConverter;
     private RowMapper<Card> cardConverter;
 
-    public JdbcTemplatePexesoRepository() {
-        try {
-            dataSource = new MariaDbDataSource();
-            dataSource.setUserName("student");
-            dataSource.setPassword("password");
-            dataSource.setUrl("jdbc:mysql://localhost:3306/PexesoCZ");
-            querySender = new JdbcTemplate(dataSource);
-            boardConverter = BeanPropertyRowMapper.newInstance(GameBoard.class);
-            cardConverter = BeanPropertyRowMapper.newInstance(Card.class);
-        } catch (SQLException e) {
-            throw new RuntimeException("Nepodarilo se pripojit do databaze: " + e.getMessage(), e);
-        }
+    public JdbcTemplatePexesoRepository(DataSource dataSource) {
+        querySender = new JdbcTemplate(dataSource);
+        boardConverter = BeanPropertyRowMapper.newInstance(GameBoard.class);
+        cardConverter = BeanPropertyRowMapper.newInstance(Card.class);
     }
 
     public GameBoard findOne(Long id) {
