@@ -16,5 +16,5 @@ CREATE TABLE Cards (
   CardNumber INT DEFAULT 0 NOT NULL,
   Status VARCHAR(250) ,
   CardOrder INT NOT NULL DEFAULT 0,
-  CONSTRAINT HerniPlocha_FK FOREIGN KEY (HerniPlochaID) REFERENCES HerniPlochy (ID)
+  CONSTRAINT GameBoard_FK FOREIGN KEY (GameBoardID) REFERENCES GameBoards (ID)
 );

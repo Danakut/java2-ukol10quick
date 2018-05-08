@@ -8,7 +8,6 @@ public class PexesoService {
     
 
     public final int CARD_PAIR_SUM = 4;
-//    private InMemoryPexesoRepository gameProvider = new InMemoryPexesoRepository();
 
     private PexesoRepository gameProvider;
 
@@ -56,7 +55,7 @@ public class PexesoService {
 
             Card card1 = turnedCards.get(0);
             Card card2 = turnedCards.get(1);
-            if (card1.getPictureNumber() == card2.getPictureNumber()) {
+            if (card1.getFilepath().equals(card2.getFilepath())) {
                 card1.setStatus(CardStatus.TAKEN);
                 card2.setStatus(CardStatus.TAKEN);
                 cardsTaken +=2;
@@ -77,21 +76,11 @@ public class PexesoService {
 
     private List<Card> createCardset() {
         List<Card> cardset = new ArrayList<>();
-        int cardNumber = 0;
-        for (int pictureNumber = 0; pictureNumber < CARD_PAIR_SUM; pictureNumber++) {
-            Card card = new Card(cardNumber++, pictureNumber, CardStatus.BACK);
-            cardset.add(card);
-            card = new Card(cardNumber++, pictureNumber, CardStatus.BACK);
+        for (int cardNumber = 0; cardNumber < CARD_PAIR_SUM * 2; cardNumber++) {
+            Card card = new Card(cardNumber, CardStatus.BACK);
             cardset.add(card);
         }
         Collections.shuffle(cardset);
         return cardset;
     }
-
-
-
-    
-
-
-
 }
