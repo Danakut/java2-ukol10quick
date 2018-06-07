@@ -8,23 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../static/css/style.css" th:href="${'css/style.css'}" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&amp;subset=latin-ext" rel="stylesheet">
-    <title>Ukol10 - pexeso (funkční)</title>
+    <title>Ukol10 - pexeso (bez databáze)</title>
 </head>
 <body>
     <header>
         <div class="header">
-            <h1><a href="index.html">Pexeso</a></h1>
+            <h1><a href="index.html" th:href=".">Pexeso</a></h1>
         </div>
     </header>
 
     <main>
-        <div th:if="${currentBoard.status == T(cz.czechitas.webapp.entity.GameStatus).GAME_FINISHED}" class="finished">
+        <div th:if="${currentBoard.stav == T(cz.czechitas.webapp.entity.StavHry).KONEC}" class="finished">
             <h2>konec hry</h2>
             <p>
                 <a th:href="newtable.html" href="table.html">Začít novou hru</a>
-            </p>
-            <p>
-                <a href="game-list.html">Seznam her</a>
             </p>
         </div>
 
@@ -37,7 +34,7 @@
                            th:name="${'clickedCard' + card.cardNumber}"/>
                     <input class="card" type="image"
                            th:if="${card.status == T(cz.czechitas.webapp.entity.CardStatus).BACK}"
-                           th:src="${'images/rub.png'}"
+                           th:src="${'images/back.jpg'}"
                            th:name="${'clickedCard' + card.cardNumber}"/>
                     <img class="taken"
                          th:if="${card.status == T(cz.czechitas.webapp.entity.CardStatus).TAKEN}"
@@ -47,9 +44,6 @@
         </form>
         <p>
             <a href="table.html" th:href="${'newtable.html'}">Začít novou hru</a>
-        </p>
-        <p>
-            <a class="main_odkaz" href="game-list.html">Seznam her</a>
         </p>
     </main>
 

@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cz.czechitas.java2</groupId>
-    <artifactId>ukol10</artifactId>
+    <artifactId>ukol10quick</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>ukol10</name>
+    <name>ukol10quick</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -69,7 +69,7 @@
     </dependencies>
 
     <build>
-        <finalName>ukol10</finalName>
+        <finalName>ukol10quick</finalName>
 
         <plugins>
             <plugin>
