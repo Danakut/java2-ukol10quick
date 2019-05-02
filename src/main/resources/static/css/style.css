@@ -76,6 +76,12 @@ div.container {
     height: 100%;
 }
 
+footer {
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+}
+
 .footer {
     position:relative;
     width: 100%;
