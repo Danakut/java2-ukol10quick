@@ -69,7 +69,8 @@
     </dependencies>
 
     <build>
-        <finalName>ukol10quick</finalName>
+        <!--<finalName>ukol10quick</finalName>-->
+        <finalName>battlepex</finalName>
 
         <plugins>
             <plugin>
