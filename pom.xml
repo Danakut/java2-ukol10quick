@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cz.czechitas.java2</groupId>
-    <artifactId>ukol10quick</artifactId>
+    <artifactId>battlepex-quick</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>ukol10quick</name>
+    <name>battlepex-quick</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -69,8 +69,7 @@
     </dependencies>
 
     <build>
-        <!--<finalName>ukol10quick</finalName>-->
-        <finalName>battlepex</finalName>
+        <finalName>battlepex-quick</finalName>
 
         <plugins>
             <plugin>
